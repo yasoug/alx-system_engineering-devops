@@ -1,7 +1,7 @@
 # update package
 exec { 'update':
   command => 'sudo apt-get -y update',
-  prvider => shell,
+  provider => shell,
 }
 
 # instal and configure nginx
@@ -11,11 +11,8 @@ exec { 'update':
 }
 
 # add the custom HTTP header
--> file_line { 'add custom header':
-  ensure => present,
-  path   => '/etc/nginx/sites-enabled/default',
-  line   => "\n\t\tadd_header X-Served-By \"$(hostname)\";",
-  after  => 'location / {',
+-> exec { 'replace':
+  command => 'sudo sed -i "/server_name _;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default',
   provider => shell,
 }
 
