@@ -43,5 +43,5 @@ frontend HAproxy_lb
 
 backend bked
         balance roundrobin
-        server 372350-web-01 34.229.67.35:80 check
-        server 372350-web-02 34.207.121.74:80 check
+        server 372350-web-01 35.153.18.120:80 check
+        server 372350-web-02 34.203.77.73:80 check
